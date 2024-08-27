@@ -1,6 +1,6 @@
-Professional Data Analyst Portfolio
+Nabilah's Portfolio
 
-Welcome to my professional data analyst portfolio😊! This repository hosts the code for my personal website, where I showcase my skills, projects, and experience as a data analyst.
+Welcome to my Data Analyst portfolio😊! This repository serve as a platform for me to showcase my skills and projects.
 
 
 | Project                  | Description |
