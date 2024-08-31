@@ -38,11 +38,26 @@ FROM Financial_analysis_customerdata C JOIN Financial_analysis_loandata_cleaned 
 WHERE term_months=60;
 ```
 **2.2 Find the total loan amount for each customer by joining the customerdata and loandata tables.**
+```sql
+WITH Financial_analysis_loandata_cleaned AS(
+	SELECT CONCAT(loan_info_id,'-',loan_id_number) AS loan_id, loan_amnt, funded_amnt, term_months, int_rate, installment, annual_inc, monthly_inc, minc_to_minst, verification_status, issue_date, loan_status, dti, delinq_2yrs
+	FROM Financial_analysis_loandata
+	)
+
+SELECT c.loan_id, c.emp_title, L.loan_amnt
+FROM Financial_analysis_customerdata C JOIN Financial_analysis_loandata_cleaned L
+		ON C.loan_id=L.loan_id;
+```
 ***
 
 ## 3. Aggregate Functions
 
 **3.1 Calculate the average interest rate for loans with a status of "Current".**
+```sql
+SELECT AVG(int_rate) AS average_interest_rate
+FROM Financial_analysis_loandata
+WHERE loan_status='current';
+```
 **3.2 Find the maximum loan amount for each loan grade.**
 ***
 
