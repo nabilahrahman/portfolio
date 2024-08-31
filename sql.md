@@ -59,6 +59,19 @@ FROM Financial_analysis_loandata
 WHERE loan_status='current';
 ```
 **3.2 Find the maximum loan amount for each loan grade.**
+```sql
+WITH Financial_analysis_loandata_cleaned AS(
+	SELECT CONCAT(loan_info_id,'-',loan_id_number) AS loan_id, loan_amnt, funded_amnt, term_months, int_rate, installment, annual_inc, monthly_inc, minc_to_minst, verification_status, issue_date, loan_status, dti, delinq_2yrs
+	FROM Financial_analysis_loandata
+	)
+
+SELECT c.grade, max(l.loan_amnt) AS max_loan_amount
+FROM Financial_analysis_customerdata C
+JOIN Financial_analysis_loandata_cleaned L
+	ON C.loan_id=L.loan_id
+GROUP BY C.grade
+ORDER BY c.grade;
+```
 ***
 
 ## 4. Filtering and Grouping
