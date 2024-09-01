@@ -1,5 +1,5 @@
 
-# Financial Data Analysis
+# Loan Data Analysis
 
 ## 1. Simple Select Queries
 
@@ -77,16 +77,68 @@ ORDER BY c.grade;
 ## 4. Filtering and Grouping
 
 **4.1 List the total number of loans by state.**
+- I can count the rows in the customer table to determine the total number of loans because the loan_id column is unique, meaning each row represents a distinct loan.
+```sql
+SELECT state, COUNT(*) AS total_loans
+FROM Financial_analysis_customerdata
+GROUP BY state
+ORDER BY 2 DESC;
+```
+
+
 **4.2 Find the average employment length for customers with loans greater than $20,000.**
 ***
+```sql
+WITH Financial_analysis_loandata_cleaned AS(
+	SELECT CONCAT(loan_info_id,'-',loan_id_number) AS loan_id, loan_amnt, funded_amnt, term_months, int_rate, installment, annual_inc, monthly_inc, minc_to_minst, verification_status, issue_date, loan_status, dti, delinq_2yrs
+	FROM Financial_analysis_loandata
+	)
 
+SELECT AVG(C.emp_length_num) AS avg_employment_length
+FROM Financial_analysis_customerdata C JOIN Financial_analysis_loandata_cleaned L
+		ON C.loan_id=L.loan_id
+WHERE L.loan_amnt>20000;
+```
 ## 5. Subqueries
 
 **5.1 Find the customers who have a debt-to-income ratio higher than the average across all loans.**
-**5.2 List all loans where the funded amount is less than the loan amount.**
+```sql
+WITH Financial_analysis_loandata_cleaned AS (
+    SELECT CONCAT(loan_info_id, '-', loan_id_number) AS loan_id, 
+           loan_amnt, funded_amnt, term_months, int_rate, installment, 
+           annual_inc, monthly_inc, minc_to_minst, verification_status, 
+           issue_date, loan_status, dti, delinq_2yrs
+    FROM Financial_analysis_loandata
+)
+
+SELECT C.loan_id, C.emp_title, 
+       L.dti AS debt_to_inc_ratio
+FROM Financial_analysis_customerdata C
+JOIN Financial_analysis_loandata_cleaned L ON C.loan_id = L.loan_id
+WHERE L.dti > (
+    SELECT AVG(dti)
+    FROM Financial_analysis_loandata
+);
+```
 ***
 
 ## 6. Date and String Functions
 
 **6.1 Extract the year from the issue date and count the number of loans issued each year.**
+```sql
+WITH loanyear AS (
+	SELECT YEAR(issue_date) AS Year
+	FROM Financial_analysis_loandata
+)
+
+SELECT Year, count(*) AS total_num_of_loans
+FROM loanyear
+GROUP BY YEAR
+ORDER BY YEAR;
+```
 **6.2 Find all customers whose job title starts with "Finance".**
+```sql
+SELECT *
+FROM Financial_analysis_customerdata
+WHERE emp_title LIKE 'Finance%';
+```
