@@ -1,3 +1,5 @@
+Data Source Link: [Financial_analysis_data](https://github.com/nabilahrahman/portfolio/blob/main/Financial_Analysis_Data.xlsx)
+
 ## 1. Customer and Loan Data Analysis
 **Question: Find the top 5 states with the highest average loan amount among customers with more than 2 years of employment. For each state, include the count of loans and the average interest rate.**
 ```sql
