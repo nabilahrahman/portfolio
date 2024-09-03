@@ -1,0 +1,24 @@
+## 1. Customer and Loan Data Analysis
+**Question: Find the top 5 states with the highest average loan amount among customers with more than 2 years of employment. For each state, include the count of loans and the average interest rate.**
+```sql
+WITH loandata_cleaned AS(
+   -- Combine loan_info_id and loan_id_number to create a unique loan_id 
+   -- that matches the loan_id in the customerdata table for joining
+	SELECT CONCAT(loan_info_id,'-',loan_id_number) AS loan_id, loan_amnt, funded_amnt, term_months, int_rate, installment, annual_inc, monthly_inc, minc_to_minst, verification_status, issue_date, loan_status, dti, delinq_2yrs
+	FROM Financial_analysis_loandata
+	)
+
+SELECT C.state, 
+	   AVG(L.loan_amnt) AS Avg_loan_amnt, 
+	   COUNT(C.loan_id) AS Count_of_loans, 
+	   AVG(L.int_rate) AS Avg_int_rate
+FROM Financial_analysis_customerdata C
+JOIN loandata_cleaned L
+	ON C.loan_id=L.loan_id
+WHERE emp_length_num>2
+GROUP BY C.state
+ORDER BY 2 DESC
+OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY -- LIMIT clause is not supported by SQL Server, Hence using this clause to achive the same result
+; 
+```
+
