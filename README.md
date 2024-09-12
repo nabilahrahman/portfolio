@@ -1,6 +1,5 @@
-Nabilah's Portfolio
-
-Welcome to my Data Analyst portfolio😊! This repository serve as a platform for me to showcase my skills and projects.
+## Welcome to my Data Analyst Portfolio!
+This repository is a collection of my projects and work, showcasing my skills in data analysis, visualization, and problem-solving. Take a look around to see how I approach data-driven insights and solutions. 😊
 
 ## SQL
 |Project Link| Tools|Poject Description | Project Status |
