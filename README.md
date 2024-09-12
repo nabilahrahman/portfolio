@@ -11,4 +11,4 @@ This repository is a collection of my projects and work, showcasing my skills in
 ## Power BI
 |Project Link| Tools|Poject Description | Project Status |
 |---|---|---|---|
-|[Sales and Customer Analytics Dashboard](https://github.com/nabilahrahman/portfolio/blob/main/Sales_and_Customer_Analytics_Dashboard.md)| Power BI|I created a Power BI dashboard that gives a clear view of important business metrics like total sales, orders, active customers, and customer lifetime value (CLV). It also tracks churn rate, average purchase value, and revenue per customer, helping to easily understand customer trends and business performance.|Completed|
+|[Sales and Customer Analytics Dashboard](https://github.com/nabilahrahman/portfolio/blob/main/Sales_and_Customer_Analytics_Dashboard.md)| Microsoft Power BI|I created a Power BI dashboard that gives a clear view of important business metrics like total sales, orders, active customers, and customer lifetime value (CLV). It also tracks churn rate, average purchase value, and revenue per customer, helping to easily understand customer trends and business performance.|Completed|
